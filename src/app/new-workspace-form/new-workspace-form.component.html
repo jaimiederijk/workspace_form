@@ -1,0 +1,90 @@
+<div class="container">
+  <div >
+    <h1>Nieuwe werkruimte aanvragen</h1>
+    <form (ngSubmit)="onSubmit()" #newWorkspaceForm="ngForm">
+      <fieldset [hidden]="view !== 'form'">
+        <div class="form-group">
+          <label for="title">Titel</label>
+          <input type="text" class="form-control" id="title"
+            [(ngModel)]="model.title" name="title" value=""
+            #title="ngModel"
+            required maxlength="50">
+            <div class="input-msg" *ngIf="model.title.length > 49">
+              title can't be longer than 50 characters.
+            </div>
+            <div [hidden]="title.valid || title.pristine"
+              class="input-msg alert alert-danger">
+              <div *ngIf="title.errors?.['required']">
+                title is required.
+              </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="department">Afdeling</label>
+          <input list="departments" class="form-control" id="department"
+            required
+            [(ngModel)]="model.department" name="department"
+            #department="ngModel"
+            appListCheck="departments"
+            required>
+          <datalist id="departments">
+            <option *ngFor="let dep of departments" [value]="dep">{{dep}}</option>
+          </datalist>
+          <div [hidden]="department.valid || department.pristine" class="input-msg alert alert-danger">
+            <div *ngIf="department.errors?.['listCheck']">
+              Please select or type a existing department. 
+            </div>
+            <div *ngIf="department.errors?.['required']">
+              Department is required.
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="subject">Onderwerp</label>
+          <select class="form-control" id="subject"
+                  [(ngModel)]="model.subject" name="subject"
+                  #subject="ngModel">
+            <option *ngFor="let sub of subjects" [value]="sub">{{sub}}</option>
+          </select>
+          <!-- <div [hidden]="subject.valid || subject.pristine" class="alert alert-danger">
+            subject is required
+          </div> -->
+        </div>
+        <div class="form-group">
+          <label for="email">Email aanvrager</label>
+          <input type="email" class="form-control" id="email"
+            [(ngModel)]="model.creatorEmail" name="creatorEmail"
+            #creatorEmail="ngModel" [email]="true"
+            placeholder="jan@mindef.nl"
+            required>
+          <div [hidden]="creatorEmail.valid || creatorEmail.pristine" class="input-msg alert alert-danger">
+            
+            <div *ngIf="creatorEmail.errors?.['required']">
+              email is required.
+            </div>
+            <div *ngIf="creatorEmail.errors?.['email']">
+              email needs to be valid.
+            </div>
+          </div>
+        </div>
+        <button type="button" class="btn btn-success" (click)="onReview()" [disabled]="!newWorkspaceForm.form.valid">Submit</button>
+        <button type="button" class="btn btn-default" (click)="newNewWorkspaceForm(); newWorkspaceForm.reset({ title:'' })">Reset</button>
+      </fieldset>
+      <fieldset [hidden]="view !== 'review'" class="confirmation">
+        <h2>Bevestiging</h2>
+        <p><span>Titel:</span><span>{{ model.title }}</span></p>
+        <p><span>Afdeling:</span><span>{{ model.department }}</span></p>
+        <p><span>Onderwerp:</span><span>{{ model.subject }}</span></p>
+        <p><span>Email:</span><span>{{ model.creatorEmail }}</span></p>
+        <button type="submit" class="btn btn-success">Submit</button>
+        <button type="button" class="btn btn-default" (click)="backoutReview()">Edit</button>
+      </fieldset>
+      <span [hidden]="view !== 'submitting'">Sending request</span>
+      <fieldset [hidden]="view !== 'succes'">
+        <h2>Uw aanvraag is succesvol verstuurd</h2>
+        <button type="button" class="btn btn-default" (click)="newNewWorkspaceForm(); newWorkspaceForm.reset({ title:'' })">Vraag nog een werkruimte aan</button>
+      </fieldset>
+    </form>
+  </div>
+</div>
+
