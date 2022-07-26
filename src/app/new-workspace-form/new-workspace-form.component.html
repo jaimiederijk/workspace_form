@@ -76,7 +76,11 @@
         <p><span>Afdeling:</span><span>{{ model.department }}</span></p>
         <p><span>Onderwerp:</span><span>{{ model.subject }}</span></p>
         <p><span>Email:</span><span>{{ model.creatorEmail }}</span></p>
-        <button type="submit" class="btn btn-success">Submit</button>
+        <div class="check-field" [ngClass]="{'negative': !reviewCheck, 'positive' : reviewCheck }">
+          <label for="reviewcheck">Bevestig dat bovenstaande informatie klopt:</label>
+          <input type="checkbox" name="reviewcheck" id="reviewcheck" [(ngModel)]="reviewCheck" [checked]="true">
+        </div>
+        <button type="submit" [disabled]="!newWorkspaceForm.form.valid || !reviewCheck" class="btn btn-success">Submit</button>
         <button type="button" class="btn btn-default" (click)="backoutReview()">Edit</button>
       </fieldset>
       <span [hidden]="view !== 'submitting'">Sending request</span>

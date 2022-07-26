@@ -51,6 +51,27 @@ input {
     display: inline-block;
     width: 12em;
   }
+  .check-field {
+    label {
+      padding-left: 0.5rem;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    input {
+      width: 20px;
+      height: 20px;
+      position: relative;
+      top: 5px;
+      &:hover {
+        cursor: pointer;
+        outline: $highlight solid 2px;
+      }
+      &:focus, &:focus-visible {
+        outline: $highlight solid 2px;
+      }
+    }
+  }
 }
 button {
   padding: 0.5rem 1rem;
@@ -82,11 +103,11 @@ button {
   margin: 0.5rem 0;
 }
 
-.ng-valid[required], .ng-valid.required  {
+.ng-valid[required], .ng-valid.required, .positive  {
   border-color: $positve;
   border-left: 5px solid $positve;
 }
 
-.ng-invalid:not(form)  {
+.ng-invalid:not(form), .negative {
   border-left: 5px solid $alert;
 }

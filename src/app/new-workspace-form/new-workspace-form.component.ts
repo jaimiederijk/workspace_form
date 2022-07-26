@@ -26,6 +26,7 @@ export class NewWorkspaceFormComponent implements OnInit {
   view = 'form';
   submitted = false;
   submitSucces = false;
+  reviewCheck = false;
 
   newNewWorkspaceForm() {
     this.model = new Workspace(1, '', '', '', '');
