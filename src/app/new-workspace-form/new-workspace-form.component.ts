@@ -16,7 +16,7 @@ export class NewWorkspaceFormComponent implements OnInit {
     'Bedrijfsstoffenbedrijf (DBBB)', 'Defensie Bewakings- en Beveiligingsorganisatie (DBBO)', 'Commandant der Zeemacht in het Caribisch Gebied (CZMCARIB)',
   ]
 
-  subjects = ['', 'Besturen', 'Besturen & Overige ondersteuning', 'Beveiliging', 'Communicatie', 
+  subjects: string[] = ['', 'Besturen', 'Besturen & Overige ondersteuning', 'Beveiliging', 'Communicatie', 
     'Documentaire Informatievoorziening', 'Facilitair', 'Financiën',
     'Gereedstelling en inzet', 'Evenementen',
   ]

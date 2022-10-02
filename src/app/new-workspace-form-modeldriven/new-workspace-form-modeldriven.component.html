@@ -1,0 +1,11 @@
+<form [formGroup]="newWorkspaceReactive" (ngSubmit)="onSubmit()">
+  <label for="title">Name: </label>
+  <input id="title" type="text" formControlName="title">
+  <p>Value: {{ title }}</p>
+  <label for="department">Afdeling</label>
+    <input list="departments" formControlName="department" id="department" required>
+    <datalist id="departments">
+      <option *ngFor="let dep of departments" [value]="dep">{{dep}}</option>
+    </datalist>
+  <button type="submit" [disabled]="!newWorkspaceReactive.valid">Submit</button>
+</form>
